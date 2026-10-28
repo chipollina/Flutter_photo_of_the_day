@@ -1,17 +1,54 @@
-# photo_of_the_day_domracheva
+# Лабораторная работа №8. Асинхронность в Dart и Flutter. Создание приложения «Фото дня»
+Flutter-приложение, которое загружает случайное фото собаки или пейзажа
+по нажатию кнопки. Демонстрирует асинхронность в Dart: `Future`, `async/await`,
+`try/catch`, `setState`.
+# Автор
 
-A new Flutter project.
+**Имя: Домрачевой Полины**
+**Группа: ИСП-241**
 
-## Getting Started
+# Стек и версии
+- Flutter: 3.47.4
+- Dart: 3.13.3
+- Платформа: Web (Chrome)
+- http: ^1.6.0
 
-This project is a starting point for a Flutter application.
+# Скриншот приложения
 
-A few resources to get you started if this is your first Flutter project:
+![Скриншот приложения](img/step2.1_Domracheva.png)
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+# Запуск
+1. `git clone https://github.com/chipollina/Flutter_photo_of_the_day.git`
+2. `cd Flutter_photo_of_the_day`
+3. `flutter pub get`
+4. `flutter run -d chrome`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Что изучила 
+
+- Как работает `Future` и зачем нужен `async/await`.
+- Как отправлять запросы через пакет `http` и разбирать JSON.
+- Как обрабатывать ошибки в асинхронном коде (`try/catch`).
+- Как переключать состояние экрана через `setState` (загрузка, ошибка, картинка).
+- Как подключать локальные картинки через `Image.asset` и `pubspec.yaml`.
+
+## Ответы на вопросы
+
+1. Что такое Future<T>? Чем отличается от обычного возвращаемого значения?
+
+Это как обещание, что результат появится позже. Обычное значение есть сразу, а Future — только через какое-то время. Обычное значение - отдают сразу и сразу можно пользоваться,Future — отдают «позже», пока не используешь await, внутри пусто.
+
+2. Что делает await? Блокирует ли он весь поток выполнения?
+
+Ждёт, пока Future выполнится, и только потом идёт дальше. Но весь поток не блокирует — интерфейс продолжает работать.
+
+3. Зачем setState() вызывается дважды в _fetchPhoto()?
+
+Первый раз - чтобы показать загрузку и убрать старое фото. Второй - чтобы скрыть загрузку и показать новое фото (или ошибку).
+
+4. Почему кнопке передаётся _fetchPhoto без скобок, а не _fetchPhoto()?
+
+Потому что мы передаём саму функцию, а не вызываем её. Со скобками она сработала бы сразу при запуске экрана.
+
+5. Чем Image.network() отличается от Image.asset()?
+
+`Image.network` грузит картинку по ссылке из интернета, а `Image.asset` берёт её из папки проекта (`assets/`).
